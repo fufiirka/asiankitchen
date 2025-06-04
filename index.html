@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Азиатская кухня</title>
+  <style>
+    /* Сброс и базовые стили */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background-color: #fff8f0;
+      transition: background-color 0.5s ease;
+    }
+    /* Контейнер всех секций — вертикальный скролл */
+    .container {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+    /* Каждая секция занимает весь экран */
+    section {
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+    }
+    /* Заголовок */
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #333;
+      transition: color 0.3s ease;
+      cursor: default;
+    }
+    /* Изменение цвета заголовка при наведении */
+    h1:hover {
+      color: #e67300;
+    }
+    /* Текст с анимацией появления */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+      max-width: 700px;
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    /* Активный класс — текст появляется */
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Стили для картинок */
+    .img {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin: 30px auto 0;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container">
+    <!-- Первая секция -->
+    <section id="section1">
+      <h1>Виды азиатской кухни</h1>
+      <p class="fade-in">
+        Азиатская кухня включает множество разнообразных стилей и традиций: японская, китайская, корейская, тайская и многие другие.
+        Каждый вид уникален своими ингредиентами и способами приготовления.
+      </p>
+      <img src="IMG/картинка1.jpg" alt="Виды азиатской кухни" class="img">
+    </section>
+
+    <!-- Вторая секция -->
+    <section id="section2">
+      <h1>Способы приготовления</h1>
+      <p class="fade-in">
+        Основные способы приготовления: жарка, варка, тушение, приготовление на пару.
+        Например, суши — холодное блюдо, а вок — быстрая жарка на сковороде.
+      </p>
+      <img src="IMG/рецепт2.jpg" alt="Способы приготовления" class="img">
+    </section>
+
+    <!-- Третья секция -->
+    <section id="section3">
+      <h1>Популярные блюда</h1>
+      <p class="fade-in">
+        Среди популярных блюд: рамен, пельмени димсам, кимчи, пад тай и многое другое.
+        Каждое блюдо отражает культуру и традиции своей страны.
+      </p>
+      <img src="IMG/картинка3.jpg"alt="Популярные блюда" class="img">
+    </section>
+  </div>
+
+  <script>
+    // Анимация появления текста при прокрутке
+    const fadeElems = document.querySelectorAll('.fade-in');
+
+    function checkFadeIn() {
+      const triggerBottom = window.innerHeight * 0.85;
+
+      fadeElems.forEach(elem => {
+        const elemTop = elem.getBoundingClientRect().top;
+        if (elemTop < triggerBottom) {
+          elem.classList.add('visible');
+        } else {
+          elem.classList.remove('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkFadeIn);
+    window.addEventListener('load', checkFadeIn);
+
+    // Событие клавиатуры: при нажатии клавиши 'c' переключаем фон страницы
+    let isOriginalBg = true;
+    window.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'c') {
+        document.body.style.backgroundColor = isOriginalBg ? '#d0f0c0' : '#fff8f0';
+        isOriginalBg = !isOriginalBg;
+      }
+    });
+  </script>
+</body>
+</html>
